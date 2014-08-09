@@ -43,7 +43,7 @@ $ tree
 
 Write credentials of ftp server into spec/spec_helper.rb
 
-```
+```ruby
 require "ftpspec"
 require "rubygems"
 require "rspec"
@@ -69,7 +69,7 @@ end
 
 Write spec in each spec files.
 
-```
+```ruby
 require "spec_helper"
 
 describe "/httpdocs/index.html" do
