@@ -2,7 +2,7 @@
 
 This project is under development.
 
-# Ftpspec
+# FTPSpec
 
 RSpec custom matchers for ftp server.
 
