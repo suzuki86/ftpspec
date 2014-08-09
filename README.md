@@ -1,6 +1,10 @@
+# Work in progress
+
+This project is under development.
+
 # Ftpspec
 
-TODO: Write a gem description
+RSpec custom matchers for ftp server.
 
 ## Installation
 
@@ -18,7 +22,66 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Execute ftpspec-init command.
+
+```
+ftpspec-init
+```
+
+Then, spec directory will be generated.
+
+```
+$ tree
+.
+├── Rakefile
+└── spec
+    ├── ftp_spec.rb
+    └── spec_helper.rb
+
+1 directory, 3 files
+```
+
+Write credentials of ftp server into spec/spec_helper.rb
+
+```
+require "ftpspec"
+require "rubygems"
+require "rspec"
+require "net/ftp"
+
+RSpec.configure do |c| 
+  c.add_setting :ftp, :default => nil 
+  c.before do
+    hostname = "YOUR HOSTNAME"
+    user = "YOUR USER"
+    password = "YOUR PASSWORD"
+    c.ftp = Net::FTP.new
+    c.ftp.passive = true
+    c.ftp.connect(hostname)
+    c.ftp.login(user, password)
+    Ftpspec.set_ftp
+  end 
+  c.after do
+    c.ftp.close
+  end 
+end
+```
+
+Write spec in each spec files.
+
+```
+require "spec_helper"
+
+describe "/httpdocs/index.html" do
+  it { should be_mode 644 }
+end
+```
+
+Execute rake command.
+
+```
+rake spec
+```
 
 ## Contributing
 
