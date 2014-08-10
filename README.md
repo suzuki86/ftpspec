@@ -1,6 +1,6 @@
 # Work in progress
 
-This project is under development.
+RSpec custom matchers for ftp server that enables you to test file structure like Serverspec.
 
 # FTPSpec
 
