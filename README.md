@@ -1,10 +1,10 @@
 # Work in progress
 
-RSpec custom matchers for ftp server that enables you to test file structure like Serverspec.
+This project is under development.
 
 # FTPSpec
 
-RSpec custom matchers for ftp server.
+RSpec custom matchers for ftp server that enables you to test file structure like Serverspec.
 
 ## Installation
 
