@@ -8,17 +8,29 @@ RSpec custom matchers for ftp server that enables you to test file structure lik
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone to your machine.
 
-    gem 'ftpspec'
+```
+git clone https://github.com/suzuki86/ftpspec.git
+```
 
-And then execute:
+Move to directory you cloned.
 
-    $ bundle
+```
+cd ftpspec
+```
 
-Or install it yourself as:
+Create a gem from ftpspec.gemspec with `gem build`.
 
-    $ gem install ftpspec
+```
+gem build ftpspec.gemspec
+```
+
+Install generated ftpspec-x.x.x.gem with `gem install`
+
+```
+gem install ftpspec-x.x.x.gem
+```
 
 ## Usage
 
