@@ -1,7 +1,8 @@
 require "spec_helper"
 
-describe ".check_mode" do
-  it "returns expected value" do
+describe "Ftpspec::Commands" do
+
+  before :all do
     class Ftp
       def chdir(target)
         "/httpdocs"
@@ -18,9 +19,71 @@ describe ".check_mode" do
         "/httpdocs"
       end
     end
+    @ftp = Ftp.new
+  end
 
-    allow(Ftpspec).to receive(:get_ftp) { Ftp.new }
-    actual = Ftpspec::Commands.check_mode("/httpdocs/index.php", 644)
-    expect(actual).to be true
+  describe ".check_mode" do
+    it "returns true" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_mode("/httpdocs/index.php", 644)
+      expect(actual).to be true
+    end
+    it "returns false" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_mode("/httpdocs/index.php", 645)
+      expect(actual).to be false
+    end
+  end
+
+  describe ".check_file" do
+    it "returns true" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_file("/httpdocs/index.php")
+      expect(actual).to be true
+    end
+    it "returns false" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_file("/httpdocs/dir")
+      expect(actual).to be false
+    end
+  end
+
+  describe ".check_directory" do
+    it "returns true" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_directory("/httpdocs/dir")
+      expect(actual).to be true
+    end
+    it "returns false" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_directory("/httpdocs/index.php")
+      expect(actual).to be false
+    end
+  end
+
+  describe ".check_owner" do
+    it "returns true if owner name is valid" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_owner("/httpdocs/index.php", "owner_name")
+      expect(actual).to be true
+    end
+    it "returns false if owner name is invalid" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_owner("/httpdocs/index.php", "invalid_owner")
+      expect(actual).to be false
+    end
+  end
+
+  describe ".check_group" do
+    it "returns true if group name is valid" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_group("/httpdocs/index.php", "group_name")
+      expect(actual).to be true
+    end
+    it "returns false if group name is invalid" do
+      allow(Ftpspec).to receive(:get_ftp) { @ftp }
+      actual = Ftpspec::Commands.check_group("/httpdocs/index.php", "invalid_owner")
+      expect(actual).to be false
+    end
   end
 end
