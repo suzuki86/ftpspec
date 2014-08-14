@@ -97,6 +97,58 @@ Execute rake command.
 rake spec
 ```
 
+## Matchers
+
+### be_mode
+
+Test whether file permission of subject is same as expected.
+
+```
+describe "/httpdocs/index.html" do
+  it { should be_mode 644 }
+end
+```
+
+### be_file
+
+Test whether subject is a file.
+
+```
+describe "/httpdocs/index.html" do
+  it { should be_file }
+end
+```
+
+### be_directoy
+
+Test whether subject is a directory.
+
+```
+describe "/httpdocs/images" do
+  it { should be_directoy }
+end
+```
+
+### be_owned_by
+
+Test whether subject is owned by expected owner.
+
+```
+describe "/httpdocs/index.html" do
+  it { should be_owned_by "someone" }
+end
+```
+
+### be_grouped_into
+
+Test whether subject is grouped into expected group.
+
+```
+describe "/httpdocs/index.html" do
+  it { should be_grouped_into "admin" }
+end
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/ftpspec/fork )
