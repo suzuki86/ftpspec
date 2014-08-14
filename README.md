@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/suzuki86/ftpspec.svg?branch=master)](https://travis-ci.org/suzuki86/ftpspec)
+
 # Work in progress
 
 This project is under development.
