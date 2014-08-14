@@ -119,13 +119,13 @@ describe "/httpdocs/index.html" do
 end
 ```
 
-### be_directoy
+### be_directory
 
 Test whether subject is a directory.
 
 ```
 describe "/httpdocs/images" do
-  it { should be_directoy }
+  it { should be_directory }
 end
 ```
 
