@@ -9,7 +9,13 @@ module Ftpspec
         if part[8] != "." && part[8] != ".." then
           current_path = ftp.pwd
           filemode = part[0]
-          filename = current_path + "/" + part[8]
+
+          if current_path == "/" then
+            filename = part[8]
+          else
+            filename = current_path + "/" + part[8]
+          end
+
           if filename == target then
             return Ftpspec::Utils.convert_to_octal(filemode).to_i == expected          
           end
@@ -26,7 +32,13 @@ module Ftpspec
         if part[8] != "." && part[8] != ".." then
           current_path = ftp.pwd
           filemode = part[0]
-          filename = current_path + "/" + part[8]
+
+          if current_path == "/" then
+            filename = part[8]
+          else
+            filename = current_path + "/" + part[8]
+          end
+
           if filename == target then
             return filemode[0] == "-"
           end
@@ -43,7 +55,13 @@ module Ftpspec
         if part[8] != "." && part[8] != ".." then
           current_path = ftp.pwd
           filemode = part[0]
-          filename = current_path + "/" + part[8]
+
+          if current_path == "/" then
+            filename = part[8]
+          else
+            filename = current_path + "/" + part[8]
+          end
+
           if filename == target then
             return filemode[0] == "d"
           end
@@ -61,7 +79,13 @@ module Ftpspec
           current_path = ftp.pwd
           filemode = part[0]
           owner = part[2]
-          filename = current_path + "/" + part[8]
+
+          if current_path == "/" then
+            filename = part[8]
+          else
+            filename = current_path + "/" + part[8]
+          end
+
           if filename == target then
             return owner == expected
           end
@@ -79,7 +103,13 @@ module Ftpspec
           current_path = ftp.pwd
           filemode = part[0]
           group = part[3]
-          filename = current_path + "/" + part[8]
+
+          if current_path == "/" then
+            filename = part[8]
+          else
+            filename = current_path + "/" + part[8]
+          end
+
           if filename == target then
             return group == expected
           end
