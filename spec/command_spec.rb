@@ -31,7 +31,7 @@ describe "Ftpspec::Commands" do
     it "returns true" do
       allow(@ftp).to receive(:pwd) { "/" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_mode("index.php", 644)
+      actual = Ftpspec::Commands.check_mode("/index.php", 644)
       expect(actual).to be true
     end
     it "returns false" do
@@ -52,7 +52,7 @@ describe "Ftpspec::Commands" do
     it "returns true" do
       allow(@ftp).to receive(:pwd) { "/" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_file("index.php")
+      actual = Ftpspec::Commands.check_file("/index.php")
       expect(actual).to be true
     end
     it "returns false" do
@@ -73,7 +73,7 @@ describe "Ftpspec::Commands" do
     it "returns true" do
       allow(@ftp).to receive(:pwd) { "/" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_directory("dir")
+      actual = Ftpspec::Commands.check_directory("/dir")
       expect(actual).to be true
     end
     it "returns false" do
@@ -94,7 +94,7 @@ describe "Ftpspec::Commands" do
     it "returns true if owner name is valid" do
       allow(@ftp).to receive(:pwd) { "/" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_owner("index.php", "owner_name")
+      actual = Ftpspec::Commands.check_owner("/index.php", "owner_name")
       expect(actual).to be true
     end
     it "returns false if owner name is invalid" do
@@ -115,7 +115,7 @@ describe "Ftpspec::Commands" do
     it "returns true if group name is valid" do
       allow(@ftp).to receive(:pwd) { "/" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_group("index.php", "group_name")
+      actual = Ftpspec::Commands.check_group("/index.php", "group_name")
       expect(actual).to be true
     end
     it "returns false if group name is invalid" do

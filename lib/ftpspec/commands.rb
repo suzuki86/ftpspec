@@ -11,7 +11,7 @@ module Ftpspec
           filemode = part[0]
 
           if current_path == "/" then
-            filename = part[8]
+            filename = "/" + part[8]
           else
             filename = current_path + "/" + part[8]
           end
@@ -34,7 +34,7 @@ module Ftpspec
           filemode = part[0]
 
           if current_path == "/" then
-            filename = part[8]
+            filename = "/" + part[8]
           else
             filename = current_path + "/" + part[8]
           end
@@ -57,7 +57,7 @@ module Ftpspec
           filemode = part[0]
 
           if current_path == "/" then
-            filename = part[8]
+            filename = "/" + part[8]
           else
             filename = current_path + "/" + part[8]
           end
@@ -81,7 +81,7 @@ module Ftpspec
           owner = part[2]
 
           if current_path == "/" then
-            filename = part[8]
+            filename = "/" + part[8]
           else
             filename = current_path + "/" + part[8]
           end
@@ -105,7 +105,7 @@ module Ftpspec
           group = part[3]
 
           if current_path == "/" then
-            filename = part[8]
+            filename = "/" + part[8]
           else
             filename = current_path + "/" + part[8]
           end
