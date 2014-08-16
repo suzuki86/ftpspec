@@ -87,6 +87,15 @@ Execute rake command.
 $ rake spec
 ```
 
+Results are shown.
+
+```
+.
+
+Finished in 2 seconds (files took 0.14477 seconds to load)
+1 examples, 0 failures
+```
+
 ## Matchers
 
 ### be_mode
