@@ -102,7 +102,7 @@ Finished in 2 seconds (files took 0.14477 seconds to load)
 
 Test whether file permission of subject is same as expected.
 
-```
+```ruby
 describe "/httpdocs/index.html" do
   it { should be_mode 644 }
 end
@@ -112,7 +112,7 @@ end
 
 Test whether subject is a file.
 
-```
+```ruby
 describe "/httpdocs/index.html" do
   it { should be_file }
 end
@@ -122,7 +122,7 @@ end
 
 Test whether subject is a directory.
 
-```
+```ruby
 describe "/httpdocs/images" do
   it { should be_directory }
 end
@@ -132,7 +132,7 @@ end
 
 Test whether subject is owned by expected owner.
 
-```
+```ruby
 describe "/httpdocs/index.html" do
   it { should be_owned_by "someone" }
 end
@@ -142,7 +142,7 @@ end
 
 Test whether subject is grouped into expected group.
 
-```
+```ruby
 describe "/httpdocs/index.html" do
   it { should be_grouped_into "admin" }
 end
