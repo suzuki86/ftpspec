@@ -22,7 +22,7 @@ describe ".convert_to_octal" do
 end
 
 describe ".convert_to_octal" do
-  it "should be raised error" do
+  it "should raise error" do
     expect do
       Ftpspec::Utils.convert_to_octal("---------")
     end.to raise_error
