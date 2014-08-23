@@ -25,19 +25,19 @@ describe "Ftpspec::Commands" do
     it "returns true" do
       allow(@ftp).to receive(:pwd) { "/httpdocs" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_mode("/httpdocs/index.php", 644)
+      actual = Ftpspec::Commands.check_mode("/httpdocs/index.php", "644")
       expect(actual).to be true
     end
     it "returns true" do
       allow(@ftp).to receive(:pwd) { "/" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_mode("/index.php", 644)
+      actual = Ftpspec::Commands.check_mode("/index.php", "644")
       expect(actual).to be true
     end
     it "returns false" do
       allow(@ftp).to receive(:pwd) { "/httpdocs" }
       allow(Ftpspec).to receive(:get_ftp) { @ftp }
-      actual = Ftpspec::Commands.check_mode("/httpdocs/index.php", 645)
+      actual = Ftpspec::Commands.check_mode("/httpdocs/index.php", "645")
       expect(actual).to be false
     end
   end

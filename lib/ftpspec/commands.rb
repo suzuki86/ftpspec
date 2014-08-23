@@ -17,7 +17,7 @@ module Ftpspec
           end
 
           if filename == target then
-            return Ftpspec::Utils.convert_to_octal(filemode).to_i == expected          
+            return Ftpspec::Utils.convert_to_octal(filemode) == expected
           end
         end
       end

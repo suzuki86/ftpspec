@@ -77,7 +77,7 @@ Write spec in each spec files.
 require "spec_helper"
 
 describe "/httpdocs/index.html" do
-  it { should be_mode 644 }
+  it { should be_mode "644" }
 end
 ```
 
@@ -104,7 +104,7 @@ Test whether file permission of subject is same as expected.
 
 ```ruby
 describe "/httpdocs/index.html" do
-  it { should be_mode 644 }
+  it { should be_mode "644" }
 end
 ```
 

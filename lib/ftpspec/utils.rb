@@ -28,7 +28,7 @@ module Ftpspec
 
         end
       end
-      octal.join("").to_i
+      octal.join("").to_s
     end
   end
 end

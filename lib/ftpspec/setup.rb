@@ -8,7 +8,7 @@ module Ftpspec
 require "spec_helper"
 
 describe "/httpdocs/index.html" do
-  it { should be_mode 644 }
+  it { should be_mode "644" }
 end
       EOF
 
