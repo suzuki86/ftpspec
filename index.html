@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>FTPSpec by suzuki86</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">FTPSpec</h1>
+      <h2 class="project-tagline">RSpec custom matchers for ftp server that enables you to test file structure like Serverspec.</h2>
+      <a href="https://github.com/suzuki86/ftpspec" class="btn">View on GitHub</a>
+      <a href="https://github.com/suzuki86/ftpspec/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/suzuki86/ftpspec/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><a href="https://travis-ci.org/suzuki86/ftpspec"><img src="https://travis-ci.org/suzuki86/ftpspec.svg?branch=master" alt="Build Status"></a></p>
+
+<h1>
+<a id="ftpspec" class="anchor" href="#ftpspec" aria-hidden="true"><span class="octicon octicon-link"></span></a>FTPSpec</h1>
+
+<p>RSpec custom matchers for ftp server that enables you to test file structure like Serverspec.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>ftpspec<span class="pl-pds">'</span></span></pre></div>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install ftpspec
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Execute ftpspec-init command.</p>
+
+<pre><code>$ ftpspec-init
+</code></pre>
+
+<p>Then, spec directory will be generated.</p>
+
+<pre><code>$ tree
+.
+├── Rakefile
+└── spec
+    ├── ftp_spec.rb
+    └── spec_helper.rb
+
+1 directory, 3 files
+</code></pre>
+
+<p>Write credentials of ftp server into spec/spec_helper.rb</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">"</span>ftpspec<span class="pl-pds">"</span></span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">"</span>rubygems<span class="pl-pds">"</span></span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">"</span>rspec<span class="pl-pds">"</span></span>
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">"</span>net/ftp<span class="pl-pds">"</span></span>
+
+<span class="pl-c1">RSpec</span>.configure <span class="pl-k">do </span>|<span class="pl-smi">c</span>| 
+  c.add_setting <span class="pl-c1">:ftp</span>, <span class="pl-c1">:default</span> =&gt; <span class="pl-c1">nil</span> 
+  c.before <span class="pl-k">do</span>
+    hostname <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>YOUR HOSTNAME<span class="pl-pds">"</span></span>
+    user <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>YOUR USER<span class="pl-pds">"</span></span>
+    password <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>YOUR PASSWORD<span class="pl-pds">"</span></span>
+    c.ftp <span class="pl-k">=</span> <span class="pl-c1">Net</span>::<span class="pl-c1">FTP</span>.<span class="pl-k">new</span>
+    c.ftp.passive <span class="pl-k">=</span> <span class="pl-c1">true</span>
+    c.ftp.connect(hostname)
+    c.ftp.login(user, password)
+    <span class="pl-c1">Ftpspec</span>.set_ftp
+  <span class="pl-k">end</span> 
+  c.after <span class="pl-k">do</span>
+    c.ftp.close
+  <span class="pl-k">end</span> 
+<span class="pl-k">end</span></pre></div>
+
+<p>Write spec in each spec files.</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">"</span>spec_helper<span class="pl-pds">"</span></span>
+
+describe <span class="pl-s"><span class="pl-pds">"</span>/httpdocs/index.html<span class="pl-pds">"</span></span> <span class="pl-k">do</span>
+  it { should be_mode <span class="pl-s"><span class="pl-pds">"</span>644<span class="pl-pds">"</span></span> }
+<span class="pl-k">end</span></pre></div>
+
+<p>Execute rake command.</p>
+
+<pre><code>$ rake spec
+</code></pre>
+
+<p>Results are shown.</p>
+
+<pre><code>.
+
+Finished in 2 seconds (files took 0.14477 seconds to load)
+1 examples, 0 failures
+</code></pre>
+
+<h2>
+<a id="matchers" class="anchor" href="#matchers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Matchers</h2>
+
+<h3>
+<a id="be_mode" class="anchor" href="#be_mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>be_mode</h3>
+
+<p>Test whether file permission of subject is same as expected.</p>
+
+<div class="highlight highlight-source-ruby"><pre>describe <span class="pl-s"><span class="pl-pds">"</span>/httpdocs/index.html<span class="pl-pds">"</span></span> <span class="pl-k">do</span>
+  it { should be_mode <span class="pl-s"><span class="pl-pds">"</span>644<span class="pl-pds">"</span></span> }
+<span class="pl-k">end</span></pre></div>
+
+<h3>
+<a id="be_file" class="anchor" href="#be_file" aria-hidden="true"><span class="octicon octicon-link"></span></a>be_file</h3>
+
+<p>Test whether subject is a file.</p>
+
+<div class="highlight highlight-source-ruby"><pre>describe <span class="pl-s"><span class="pl-pds">"</span>/httpdocs/index.html<span class="pl-pds">"</span></span> <span class="pl-k">do</span>
+  it { should be_file }
+<span class="pl-k">end</span></pre></div>
+
+<h3>
+<a id="be_directory" class="anchor" href="#be_directory" aria-hidden="true"><span class="octicon octicon-link"></span></a>be_directory</h3>
+
+<p>Test whether subject is a directory.</p>
+
+<div class="highlight highlight-source-ruby"><pre>describe <span class="pl-s"><span class="pl-pds">"</span>/httpdocs/images<span class="pl-pds">"</span></span> <span class="pl-k">do</span>
+  it { should be_directory }
+<span class="pl-k">end</span></pre></div>
+
+<h3>
+<a id="be_owned_by" class="anchor" href="#be_owned_by" aria-hidden="true"><span class="octicon octicon-link"></span></a>be_owned_by</h3>
+
+<p>Test whether subject is owned by expected owner.</p>
+
+<div class="highlight highlight-source-ruby"><pre>describe <span class="pl-s"><span class="pl-pds">"</span>/httpdocs/index.html<span class="pl-pds">"</span></span> <span class="pl-k">do</span>
+  it { should be_owned_by <span class="pl-s"><span class="pl-pds">"</span>someone<span class="pl-pds">"</span></span> }
+<span class="pl-k">end</span></pre></div>
+
+<h3>
+<a id="be_grouped_into" class="anchor" href="#be_grouped_into" aria-hidden="true"><span class="octicon octicon-link"></span></a>be_grouped_into</h3>
+
+<p>Test whether subject is grouped into expected group.</p>
+
+<div class="highlight highlight-source-ruby"><pre>describe <span class="pl-s"><span class="pl-pds">"</span>/httpdocs/index.html<span class="pl-pds">"</span></span> <span class="pl-k">do</span>
+  it { should be_grouped_into <span class="pl-s"><span class="pl-pds">"</span>admin<span class="pl-pds">"</span></span> }
+<span class="pl-k">end</span></pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it ( <a href="https://github.com/%5Bmy-github-username%5D/ftpspec/fork">https://github.com/[my-github-username]/ftpspec/fork</a> )</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create a new Pull Request</li>
+</ol>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/suzuki86/ftpspec">FTPSpec</a> is maintained by <a href="https://github.com/suzuki86">suzuki86</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
